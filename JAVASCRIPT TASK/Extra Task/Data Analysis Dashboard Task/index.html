@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Analysis Dashboard</title>
+    <!-- Chart.js Library  CDN (Content Delivery Network)-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+   
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Data Analysis Dashboard</h1>
+    </header>
+
+    
+    <div>
+        <h3>Price Statistics</h3>
+        <div class="card">
+            <h4>Sum</h4>
+            <p id="sum-amount">0 Rs</p>
+        </div>
+        <div class="card">
+            <h4>Average</h4>
+            <p id="avg-amount">0 Rs</p>
+        </div>
+        <div class="card">
+            <h4>Min Price</h4>
+            <p id="min-amount">0 Rs</p>
+        </div>
+        <div class="card">
+            <h4>Max Price</h4>
+            <p id="max-amount">0 Rs</p>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <label for="category-select">Filter by Category: </label>
+        <select id="category-select">
+            <option value="all">All</option>
+        </select>
+    </div>
+
+
+    <div>
+        <div class="chart-box">
+            <h3>Stock Bar Chart</h3>
+            <canvas id="myBarChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <h3>Price Line Chart</h3>
+            <canvas id="myLineChart"></canvas>
+        </div>
+    </div>
+
+    <h3>Product Data Table</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- dynamically rows -->
+        </tbody>
+    </table>
+
+  
+
+    <script src="script.js"></script>
+</body>
+</html>

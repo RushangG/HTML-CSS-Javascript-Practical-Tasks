@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music Player with Playlist</title>
+
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Music Player</h1>
+    </header>
+
+    <main>
+        <div class="main-box">
+
+            <div class="left-side">
+                <div class="box box-player">
+                    <h3 id="song-title">No Song Playing</h3>
+                    <img id="song-image" class="cover-image"
+                        src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300" alt="Song Cover">
+                    <p id="song-artist">Artist Name</p>
+
+                    <audio id="my-audio" controls>
+                        <source src="" type="audio/mpeg">
+                    </audio>
+
+                    <div class="control-buttons">
+                        <button id="play-button">Play</button>
+                        <button id="pause-button">Pause</button>
+                        <button id="stop-button">Stop</button>
+                        <button id="next-button">Next</button>
+                        <button id="shuffle-button">Shuffle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-side box">
+
+                <div class="box">
+                    <h3>Add Music</h3>
+                    <label for="add-title">Song Title</label>
+                    <input type="text" id="add-title" class="form-input" placeholder="Song Title">
+                    <label for="add-artist">Artist Name</label>
+                    <input type="text" id="add-artist" class="form-input" placeholder="Artist Name">
+                    <label for="add-url">Audio URL(.mp3)</label>
+                    <input type="text" id="add-url" class="form-input" placeholder="Audio URL (.mp3)">
+                    <label for="add-image">Image URL</label>
+                    <input type="text" id="add-image" class="form-input" placeholder="Image URL">
+                    <button id="add-song-button">Add Song</button>
+                </div>
+
+                <h3>My Playlist</h3>
+                <ul id="playlistView"></ul>
+
+            </div>
+
+        </div>
+    </main>
+
+
+    <script src="script.js"></script>
+    
+</body>
+
+</html>

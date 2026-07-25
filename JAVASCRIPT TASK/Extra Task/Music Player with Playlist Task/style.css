@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.main-box {
+    display: flex;
+    gap: 20px;
+}
+
+.left-side {
+    width: 60%;
+}
+
+.right-side {
+    width: 40%;
+}
+
+.box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.box-player {
+    text-align: center;
+}
+
+.cover-image {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.active-song {
+    background-color: #d1e7dd;
+    font-weight: bold;
+}
+
+.control-buttons {
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .main-box {
+        flex-direction: column;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%;
+    }
+}
