@@ -71,7 +71,7 @@ async function validatePassword() {
     const errorPassword = document.getElementById('error-password');
 
     if (!regex.test(password) && password.length > 0) {
-        errorPassword.textContent = '8+ chars: A-Z, a-z, 0-9, symbol.';
+        errorPassword.textContent = '8+ chars: required(A-Z, a-z, 0-9, symbol).';
         errorPassword.style.color = 'red';
     } else if (regex.test(password) && password.length > 0) {
         errorPassword.textContent = 'Valid password format';

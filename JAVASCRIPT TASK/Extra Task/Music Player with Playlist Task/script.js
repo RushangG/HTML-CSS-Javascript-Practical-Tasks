@@ -159,21 +159,32 @@ async function removeSong(index) {
         return;
     }
 
+    const playingRemovedSong =  (index === currentIndex);
+
     playlist.splice(index, 1);
+
     if (playlist.length === 0) {
         await stopSong();
         songTitle.innerText = "No Song Playing";
         songArtist.innerText = "";
         songImage.src = "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300";
-
-
     } else {
-        if (index <= currentIndex && currentIndex > 0) {
+        // remove prev song so decress currentindex by 1.
+        if (index < currentIndex) {
             currentIndex--;
         }
-        await loadSong(currentIndex);
+
+
+        if (playingRemovedSong) {
+            // if removed last song, play first song
+            if (currentIndex >= playlist.length) {
+                currentIndex = 0;
+            }
+            await loadSong(currentIndex);
+        } else {
+            await showPlaylist();
+        }
     }
-    await showPlaylist();
 }
 
 async function addSong() {

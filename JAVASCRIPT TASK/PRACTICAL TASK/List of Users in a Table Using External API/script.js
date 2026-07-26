@@ -1,5 +1,6 @@
 const apiUrl = 'https://jsonplaceholder.typicode.com/users';
 
+//fetch user data from the API
 async function fetchUserData() {
     try {
 
@@ -22,6 +23,7 @@ async function fetchUserData() {
     }
 }
 
+// show user in table.
 async function showUserData(users) {
     const tableBody = document.getElementById('user-table-body');
     tableBody.innerHTML = '';
@@ -50,6 +52,8 @@ async function notFound() {
     tableBody.appendChild(row);
 }
 
+
+// search user by name and email
 async function searchUser() {
     const searchBox = document.getElementById('search-box');
     const term = searchBox.value.toLowerCase();
@@ -84,6 +88,7 @@ async function searchUser() {
 
 const searchButton = document.getElementById('search-button');
 const searchBox = document.getElementById('search-box');
+
 searchBox.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         event.preventDefault();

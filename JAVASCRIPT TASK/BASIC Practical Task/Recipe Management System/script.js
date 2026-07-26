@@ -16,6 +16,7 @@ async function addRecipe(recipe, index = null) {
     else {
         recipes.push(recipe); // add new  recipe to the array.
     }
+
     localStorage.setItem('recipes', JSON.stringify(recipes));
 }
 
@@ -89,6 +90,9 @@ async function deleteRecipe(index) {
     else {
         await displayRecipes();
     }
+
+     document.getElementById('category-search').value = "";
+        document.getElementById('search-input').value = "";
 
 
 }
@@ -177,6 +181,8 @@ document.addEventListener('DOMContentLoaded', function () {
             await addRecipe(recipe); // add new recipe
         }
 
+        document.getElementById('category-search').value = "";
+        document.getElementById('search-input').value = "";
 
         displayRecipes();
 
