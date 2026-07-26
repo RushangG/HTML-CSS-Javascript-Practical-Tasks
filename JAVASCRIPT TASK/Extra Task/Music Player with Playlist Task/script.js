@@ -70,7 +70,7 @@ async function loadSong(index) {
     const song = playlist[currentIndex];
     songTitle.innerText = song.title;
     songArtist.innerText = song.artist;
-    songImage.src = song.image || "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300";
+    songImage.src = song.image;
     audio.src = song.url;
 
     await playSong();
@@ -167,7 +167,9 @@ async function removeSong(index) {
         await stopSong();
         songTitle.innerText = "No Song Playing";
         songArtist.innerText = "";
-        songImage.src = "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300";
+        songImage.src = "";
+        audio.src = "";
+        showPlaylist();
     } else {
         // remove prev song so decress currentindex by 1.
         if (index < currentIndex) {
@@ -202,7 +204,7 @@ async function addSong() {
         title: title,
         artist: artist,
         url: url,
-        image: image || "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300"
+        image: image
     });
 
     addTitleInput.value = '';

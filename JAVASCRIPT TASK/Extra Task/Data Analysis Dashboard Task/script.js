@@ -1,4 +1,5 @@
 
+
 // Global Variables
 let products = [];
 
