@@ -23,7 +23,7 @@ async function sum() {
 
     result = parseFloat(num1) + parseFloat(num2);
     console.log(result)
-    await showResult();
+    await showResult('+');
 }
 
 async function sub() {
@@ -33,7 +33,7 @@ async function sub() {
 
     result = parseFloat(num1) - parseFloat(num2);
     console.log(result)
-    await showResult();
+    await showResult('-');
 
 }
 
@@ -44,7 +44,7 @@ async function multi() {
 
     result = parseFloat(num1) * parseFloat(num2);
     console.log(result)
-    await showResult();
+    await showResult('*');
 
 }
 
@@ -63,15 +63,15 @@ async function divide() {
     }
     result = parseFloat(num1) / parseFloat(num2);
     console.log(result);
-    await showResult();
+    await showResult('/');
 
 }
 
 
 
-async function showResult() {
+async function showResult(operation) {
     resultBox.style.display = 'inline-block';
-    resultBox.innerHTML = `result : ${result}`;
+    resultBox.innerHTML = `${num1} ${operation} ${num2} = ${result}`;
 }
 
 function getInput() {

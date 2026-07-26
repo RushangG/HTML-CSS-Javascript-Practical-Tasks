@@ -41,7 +41,13 @@ function setTimer() {
 
     timeId = setInterval(() => {
         // console.log("time 4 second");
-        nextImg();
+        if (i >= images.length - 1) {
+            i = 0;
+        } else {
+            i++;
+        }
+
+         imageChange();
     }, 4000);
 
 }
