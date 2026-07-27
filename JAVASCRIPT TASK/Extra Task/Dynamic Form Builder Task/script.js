@@ -13,6 +13,9 @@ const formBuilderBox = document.getElementById("form-builder");
 const inputForm = document.getElementById("input-form");
 const inputFieldForm = document.getElementById("input-field");
 
+const inputType = document.getElementById("input-type");
+
+
 let i = 0;
 let inputNumber = 0;
 
@@ -40,7 +43,7 @@ function submitDynamicForm() {
 }
 
 
-// get total number of input using prompt 
+// 1) get total number of input using prompt 
 function getNumberOfInput() {
 
     inputBox.innerHTML = "";
@@ -56,12 +59,10 @@ function getNumberOfInput() {
     console.log(inputNumber);
 
 
-
-
 }
 
 
-//show Builder form.
+// 2) show Builder form.
 function showFormBuilder(inputNumber) {
 
     if (inputNumber <= 0) {
@@ -86,25 +87,28 @@ function showFormBuilder(inputNumber) {
 
 }
 
-// get field input 
+// get input  field details from formbuilder.
 function formBuilder() {
 
 
     const labelName = document.getElementById("label-name").value;
-    const placeholderText = document.getElementById("placeholder-text").value;
+    let placeholderText = document.getElementById("placeholder-text").value;
     const inputType = document.getElementById("input-type").value;
 
-    if (labelName == '' || placeholderText == '' || inputType == '') {
+    if (labelName == '' || inputType == '') {
 
         return;
+    }
+
+    if (placeholderText == '') {
+        placeholderText = `Enter ${labelName}`;
     }
 
     inputForm.style.display = "inline-block";
 
     console.log(labelName, placeholderText, inputType);
 
-
-
+    // type base input field creation.
     createInputFields(labelName, placeholderText, inputType);
 
     document.getElementById("label-name").value = "";
@@ -132,14 +136,20 @@ function createInputFields(labelName, placeholderText, inputType) {
         case "time":
         case "url":
         case "week":
-        case "checkbox":
-        case "radio":
             console.log(`case : ${inputType}`);
-            getInputType(labelName, placeholderText, inputType);
+            newInputFields(labelName, placeholderText, inputType);
             break;
         case "textarea":
             console.log("text area case");
             createTextArea(labelName, placeholderText, inputType);
+            break;
+        case "checkbox":
+            console.log("checkbox case");
+            checkBoxInput(labelName, placeholderText, inputType);
+            break;
+        case "radio":
+            console.log("radio case");
+            radioInput(labelName, placeholderText, inputType);
             break;
         default:
             console.log("no match");
@@ -149,9 +159,7 @@ function createInputFields(labelName, placeholderText, inputType) {
 
 
 // crete input field based on type.
-function getInputType(labelName, placeholderText, inputType) {
-
-    // let inputType = prompt("Enter input type", "text");
+function newInputFields(labelName, placeholderText, inputType) {
 
 
     let inputlabel = document.createElement("label");
@@ -165,13 +173,10 @@ function getInputType(labelName, placeholderText, inputType) {
     inputText.setAttribute("required", "required");
 
     inputBox.appendChild(document.createElement("br"));
-    if (inputType === "checkbox" || inputType === "radio") {
-        inputBox.appendChild(inputText);
-        inputBox.appendChild(inputlabel);
-    } else {
-        inputBox.appendChild(inputlabel);
-        inputBox.appendChild(inputText);
-    }
+
+    inputBox.appendChild(inputlabel);
+    inputBox.appendChild(inputText);
+
 
     inputBox.appendChild(document.createElement("br"));
 
@@ -190,8 +195,11 @@ function createTextArea(labelName, placeholderText, inputType) {
     inputText.setAttribute("placeholder", ` ${placeholderText} `);
     inputText.setAttribute("required", "required");
 
+
     inputBox.appendChild(document.createElement("br"));
     inputBox.appendChild(inputlabel);
+    inputBox.appendChild(document.createElement("br"));
+
     inputBox.appendChild(inputText);
     inputBox.appendChild(document.createElement("br"));
 
@@ -199,20 +207,116 @@ function createTextArea(labelName, placeholderText, inputType) {
 }
 
 
+
+// option get from prompt for checkbox and radio input.
+function optionSelected() {
+
+    let optionNumber = prompt("Enter number of options you want to Build", "2");
+
+    if (optionNumber <= 0) {
+        alert("Enter positive number");
+        optionSelected();
+    }
+
+    let options = [];
+    for (let i = 0; i < optionNumber; i++) {
+        let option = prompt(`Enter option ${i + 1} label`, `Option ${i + 1}`);
+
+        if (option == '') {
+            alert("Enter valid option");
+            i--;
+            continue;
+        }
+        options.push(option);
+    }
+
+
+    return options;
+
+}
+
+
+function checkBoxInput(labelName, placeholderText, inputType) {
+
+    // get options using prompt input.
+    let options = optionSelected();
+
+    // main label.
+    inputBox.appendChild(document.createElement("br"));
+    let inputlabel = document.createElement("label");
+    inputlabel.setAttribute("for", `${labelName}`);
+    inputlabel.textContent = ` ${labelName} `;
+
+    inputBox.appendChild(inputlabel);
+
+    for (let i = 0; i < options.length; i++) {
+        let checkBoxText = document.createElement("input");
+        checkBoxText.setAttribute("type", `checkbox`);
+        checkBoxText.setAttribute("name", `${options[i]}`);
+        checkBoxText.setAttribute("value", `${options[i]}`);
+
+        let checkBoxLabel = document.createElement("label");
+        checkBoxLabel.setAttribute("for", `${options[i]}`);
+        checkBoxLabel.textContent = ` ${options[i]} `;
+
+
+        inputBox.appendChild(checkBoxText);
+        inputBox.appendChild(checkBoxLabel);
+    }
+    inputBox.appendChild(document.createElement("br"));
+
+    showFormBuilder(inputNumber);
+}
+
+
+function radioInput(labelName, placeholderText, inputType) {
+    let options = optionSelected();
+    inputBox.appendChild(document.createElement("br"));
+
+    // main label for radio input. 
+    let inputlabel = document.createElement("label");
+    inputlabel.setAttribute("for", `${labelName}`);
+    inputlabel.textContent = ` ${labelName} `;
+
+    inputBox.appendChild(inputlabel);
+
+    for (let i = 0; i < options.length; i++) {
+        let radioText = document.createElement("input");
+        radioText.setAttribute("type", `radio`);
+        radioText.setAttribute("name", `${labelName}`);
+        radioText.setAttribute("value", `${options[i]}`);
+
+        let radioLabel = document.createElement("label");
+        radioLabel.setAttribute("for", `${options[i]}`);
+        radioLabel.textContent = ` ${options[i]} `;
+
+        inputBox.appendChild(radioText);
+        inputBox.appendChild(radioLabel);
+    }
+    inputBox.appendChild(document.createElement("br"));
+
+    showFormBuilder(inputNumber);
+}
+
+
+// event listener to get number of input fields.
 addButton.addEventListener("click", getNumberOfInput);
 
-
+//event listener to submit dynamic form data.
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     submitDynamicForm();
 
 })
 
+//event click on form builder submit button.
 inputFieldForm.addEventListener("submit", (e) => {
     e.preventDefault();
     formBuilder();
 })
 
+
+// ask user before leaving the page.
 window.addEventListener("beforeunload", function (e) {
 
     e.preventDefault();

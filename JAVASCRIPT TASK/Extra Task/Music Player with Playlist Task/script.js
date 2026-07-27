@@ -33,8 +33,7 @@ const songTitle = document.getElementById('song-title');
 const songArtist = document.getElementById('song-artist');
 const songImage = document.getElementById('song-image');
 
-const playButton = document.getElementById('play-button');
-const pauseButton = document.getElementById('pause-button');
+const playPauseButton = document.getElementById('play-pause-button');
 const stopButton = document.getElementById('stop-button');
 const prevButton = document.getElementById('prev-button');
 const nextButton = document.getElementById('next-button');
@@ -52,10 +51,12 @@ let currentIndex = 0;
 
 // Audio Events
 audio.onplay = function () {
+    playPauseButton.innerText = "Pause";
     console.log("Playing song");
 };
 
 audio.onpause = function () {
+    playPauseButton.innerText = "Play";
     console.log("Paused song");
 };
 
@@ -82,11 +83,23 @@ async function loadSong(index) {
 async function playSong() {
     if (playlist.length > 0) {
         audio.play();
+
     }
 }
 
 async function pauseSong() {
     audio.pause();
+}
+
+
+async function playPauseSong() {
+    if (audio.paused) {
+        await playSong();
+        playPauseButton.innerText = "Pause";
+    } else {
+        await pauseSong();
+        playPauseButton.innerText = "Play";
+    }
 }
 
 async function stopSong() {
@@ -224,8 +237,7 @@ async function addSong() {
 }
 
 // Event listeners all
-playButton.addEventListener('click', playSong);
-pauseButton.addEventListener('click', pauseSong);
+playPauseButton.addEventListener('click', playPauseSong);
 stopButton.addEventListener('click', stopSong);
 prevButton.addEventListener('click', prevSong);
 nextButton.addEventListener('click', nextSong);
