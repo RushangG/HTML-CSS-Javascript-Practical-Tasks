@@ -36,6 +36,7 @@ const songImage = document.getElementById('song-image');
 const playButton = document.getElementById('play-button');
 const pauseButton = document.getElementById('pause-button');
 const stopButton = document.getElementById('stop-button');
+const prevButton = document.getElementById('prev-button');
 const nextButton = document.getElementById('next-button');
 const shuffleButton = document.getElementById('shuffle-button');
 
@@ -100,6 +101,13 @@ async function nextSong() {
     await playSong();
 }
 
+async function prevSong() {
+    if (playlist.length === 0) return;
+    currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+    await loadSong(currentIndex);
+    await playSong();
+}
+
 // shuffle playlist
 async function shuffleSongs() {
     if (playlist.length <= 1) return;
@@ -159,7 +167,7 @@ async function removeSong(index) {
         return;
     }
 
-    const playingRemovedSong =  (index === currentIndex);
+    const playingRemovedSong = (index === currentIndex);
 
     playlist.splice(index, 1);
 
@@ -219,6 +227,7 @@ async function addSong() {
 playButton.addEventListener('click', playSong);
 pauseButton.addEventListener('click', pauseSong);
 stopButton.addEventListener('click', stopSong);
+prevButton.addEventListener('click', prevSong);
 nextButton.addEventListener('click', nextSong);
 shuffleButton.addEventListener('click', shuffleSongs);
 addSongButton.addEventListener('click', addSong);
