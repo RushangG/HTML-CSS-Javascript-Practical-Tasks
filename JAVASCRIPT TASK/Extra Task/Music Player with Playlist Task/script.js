@@ -51,12 +51,12 @@ let currentIndex = 0;
 
 // Audio Events
 audio.onplay = function () {
-    playPauseButton.innerText = "Pause";
+    playPauseButton.innerHTML = '<i class="fa fa-pause"></i>';
     console.log("Playing song");
 };
 
 audio.onpause = function () {
-    playPauseButton.innerText = "Play";
+    playPauseButton.innerHTML = '<i class="fa fa-play"></i>';
     console.log("Paused song");
 };
 
@@ -95,10 +95,10 @@ async function pauseSong() {
 async function playPauseSong() {
     if (audio.paused) {
         await playSong();
-        playPauseButton.innerText = "Pause";
+
     } else {
         await pauseSong();
-        playPauseButton.innerText = "Play";
+
     }
 }
 
@@ -218,6 +218,12 @@ async function addSong() {
 
     if (!title || !artist || !url) {
         alert('Please fill in Title, Artist, and Audio URL!');
+        return;
+    }
+
+    if (url && !url.match(/\.(mp3|wav|ogg)$/i)) {
+        alert('Please provide a valid audio URL (mp3, wav, ogg)!');
+        addUrlInput.focus();
         return;
     }
 

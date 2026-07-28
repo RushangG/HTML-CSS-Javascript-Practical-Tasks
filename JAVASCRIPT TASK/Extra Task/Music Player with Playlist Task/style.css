@@ -48,6 +48,10 @@ button {
     padding: 8px 12px;
     margin: 4px;
     cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: hsl(97, 64%, 95%);
+    
 }
 
 .form-input {

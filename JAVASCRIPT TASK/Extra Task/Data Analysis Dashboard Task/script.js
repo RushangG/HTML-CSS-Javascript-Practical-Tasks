@@ -120,7 +120,7 @@ let lineChart;
 let pieChart;
 
 
-// add categories to select dropdown
+// add dynamic categories to select dropdown
 function loadCategories() {
 
     const select = document.getElementById('category-select');

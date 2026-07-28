@@ -91,8 +91,8 @@ async function deleteRecipe(index) {
         await displayRecipes();
     }
 
-     document.getElementById('category-search').value = "";
-        document.getElementById('search-input').value = "";
+    document.getElementById('category-search').value = "";
+    document.getElementById('search-input').value = "";
 
 
 }
