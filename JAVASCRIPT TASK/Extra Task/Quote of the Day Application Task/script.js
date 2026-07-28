@@ -21,7 +21,7 @@ async function getDailyQuotes() {
         const author = data.author;
 
         // console.log(quote);
-
+        quoteBox.style.color = 'black';
         quoteBox.innerHTML = `
            <span style="font-weight:bold"> ${quote}  </span> <br><br>   Author : ${author} 
             `;

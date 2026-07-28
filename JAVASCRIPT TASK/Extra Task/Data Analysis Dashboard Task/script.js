@@ -254,6 +254,8 @@ function renderCharts(data) {
             labels: titles,
             datasets: [{
                 label: 'Price',
+                backgroundColor: 'rgba(0, 255, 0, 0.2)',
+                fill: true,
                 data: prices,
                 borderColor: 'green'
             }]

@@ -23,9 +23,24 @@ const playlist = [
         artist: "Epic Music",
         url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3",
         image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300"
-    }
+    },
+    {
+        title: "Vallah Cocktail 2",
+        artist: "Vallah",
+        url: "songs/Vallah Cocktail 2.mp3",
+        image: "https://pagalnew.com/coverimages/vallah-cocktail-2-500-500.jpg"
+    },
+    {
+        title: "Welcome to the Jungle",
+        artist: "Shaan, Priya Patidar",
+        url: "songs/Title Track Welcome To The Jungle.mp3",
+        image: "https://pagalnew.com/coverimages/title-track-welcome-to-the-jungle-500-500.jpg"
+    },
 
 ];
+
+
+
 
 // all variables
 const audio = document.getElementById('my-audio');
@@ -46,6 +61,9 @@ const addImageInput = document.getElementById('add-image');
 const addSongButton = document.getElementById('add-song-button');
 
 const playlistView = document.getElementById('playlistView');
+
+
+
 
 let currentIndex = 0;
 
@@ -162,6 +180,8 @@ async function showPlaylist() {
         const removeBtn = document.createElement('button');
 
         removeBtn.innerText = 'Remove';
+        removeBtn.style.backgroundColor = 'lightcoral';
+
         removeBtn.addEventListener('click', async function () {
             await removeSong(i);
         });
@@ -173,6 +193,40 @@ async function showPlaylist() {
 
         playlistView.appendChild(li);
     });
+}
+
+async function fileUpload() {
+    const fileInput = document.getElementById('file-input');
+
+
+    const file = fileInput.files[0];
+
+    console.log(file);
+    if (!file || !file.type.includes('audio') || !file.name.toLowerCase().endsWith('.mp3')) {
+        alert('Please select a valid audio file to upload!');
+        fileInput.value = '';
+        return;
+    }
+
+    // temporary url for uploaded file to play it.
+    const temporaryTrackUrl = URL.createObjectURL(file);
+    console.log(temporaryTrackUrl);
+
+    // get first two words of file name as artist name
+    let artistName = file.name.split(' ').slice(0, 2).join(' ');
+
+    playlist.push({
+        title: file.name,
+        artist: artistName,
+        url: temporaryTrackUrl,
+        image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300"
+    });
+
+    fileInput.value = ''; // Clear the file input
+
+
+    await showPlaylist();
+
 }
 
 async function removeSong(index) {
@@ -208,6 +262,8 @@ async function removeSong(index) {
             await showPlaylist();
         }
     }
+
+
 }
 
 async function addSong() {
@@ -221,9 +277,15 @@ async function addSong() {
         return;
     }
 
-    if (url && !url.match(/\.(mp3|wav|ogg)$/i)) {
+    if (!url.match(/\.(mp3|wav|ogg)$/i) && !url.startsWith('https://')) {
         alert('Please provide a valid audio URL (mp3, wav, ogg)!');
         addUrlInput.focus();
+        return;
+    }
+
+    if (!image.match(/\.(jpeg|jpg|gif|png)$/i) && !image.startsWith('https://')) {
+        alert('Please provide a valid image URL (jpeg, jpg, gif, png)!');
+        addImageInput.focus();
         return;
     }
 
@@ -233,6 +295,8 @@ async function addSong() {
         url: url,
         image: image
     });
+
+
 
     addTitleInput.value = '';
     addArtistInput.value = '';
@@ -250,7 +314,13 @@ nextButton.addEventListener('click', nextSong);
 shuffleButton.addEventListener('click', shuffleSongs);
 addSongButton.addEventListener('click', addSong);
 
+
+document.getElementById('file-upload-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    fileUpload();
+});
 // Initial Load
 document.addEventListener('DOMContentLoaded', async function () {
+
     await loadSong(0);
 });

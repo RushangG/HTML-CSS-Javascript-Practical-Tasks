@@ -63,6 +63,14 @@ button {
     border-radius: 4px;
 }
 
+span {
+    display: inline-block;
+    max-width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 ul {
     padding: 0;
     list-style: none;
